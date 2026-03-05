@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Youtube Game Shuffle Bitches</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:radial-gradient(circle,#1a1a1a,#000);
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+text-align:center;
+}
+
+#board{
+background:#111;
+border:8px solid gold;
+border-radius:20px;
+padding:40px;
+width:90%;
+max-width:900px;
+box-shadow:0 0 40px gold;
+}
+
+#title{
+font-size:40px;
+color:gold;
+margin-bottom:20px;
+}
+
+#word{
+font-size:90px;
+font-weight:bold;
+margin:40px 0;
+min-height:120px;
+}
+
+button{
+font-size:30px;
+padding:15px 40px;
+border:none;
+border-radius:10px;
+background:red;
+color:white;
+cursor:pointer;
+margin:10px;
+}
+
+button:hover{
+background:#cc0000;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="board">
+
+<div id="title">Youtube Game Shuffle Bitches</div>
+
+<div id="word">PRESS SHUFFLE</div>
+
+<button onclick="spin()">SHUFFLE</button>
+<button onclick="resetWords()">RESET</button>
+
+</div>
+
+<script>
+
+const originalWords = [
+"SONG OR ARTIST THAT BEGIN WITH THE LETTER S",
+"RELIGION",
+"ANIMALS",
+"80s",
+"90s",
+"FOOD THEME",
+"SONG OR ARTIST THAT BEGIN WITH THE LETTER T",
+"SONG OR ARTIST THAT HAVE A PLACE IN THE NAME",
+"SONG OR ARTIST THAT BEGIN WITH THE LETTER H",
+"SONG OR ARTIST THAT BEGIN WITH THE LETTER D",
+"SONG OR ARTIST THAT BEGIN WITH THE LETTER E",
+"SONG OR ARTIST THAT BEGIN WITH THE LETTER A",
+"SONG OR ARTIST THAT BEGIN WITH THE LETTER B",
+"SONG OR ARTIST THAT BEGIN WITH THE LETTER C",
+"SONG OR ARTIST THAT BEGIN WITH THE LETTER G",
+"SONG OR ARTIST THAT BEGIN WITH THE LETTER J",
+"SONG OR ARTIST THAT BEGIN WITH THE LETTER K",
+"SONG OR ARTIST THAT BEGIN WITH THE LETTER L",
+"SONG OR ARTIST THAT BEGIN WITH THE LETTER M",
+"SONG OR ARTIST THAT BEGIN WITH THE LETTER N",
+"SONG OR ARTIST THAT BEGIN WITH THE LETTER O",
+"SONG OR ARTIST THAT BEGIN WITH THE LETTER P",
+"GIRL BAND",
+"MOVIE THEMED",
+"SPORTS THEMED",
+"COLOURS",
+"REGGAE THEME",
+"DRINKS",
+"BOY BAND",
+"COUNTRY STYLE",
+"PLACE NAME IN THE SONG TITLE OR ARTIST NAME",
+"SONGS YOU HEAR AT A WEDDING",
+"SONGS YOU HEAR AT A FUNERAL",
+"INDIE",
+"FEMALE VOCAL OR FEMALE LEAD SINGER",
+"MALE VOCAL OR MALE LEAD SINGER",
+"WORK RELATED",
+"HOLIDAY RELATED",
+"RAP OR HIP HOP STYLE",
+"LYTHAM FESTIVAL ARTISTS",
+"DANCE/TRANCE/TECHNO/HOUSE MUSIC",
+"SONGS FOR THE OVER 65s AGE GROUP",
+"LOVE SONGS OR ROMANCE",
+"ONE WORD WONDERS (SINGLE WORD IN TITLE)",
+"NUMBERS IN THE TITLE OR ARTIST NAME",
+"NAME DROPPERS - NAME IN THE SONG TITLE",
+"FAMOUS DUOS",
+"ONE HIT WONDERS",
+"FAMOUS COVER VERSIONS",
+"GUILTY PLEASURES - CHEESE",
+"ROCK BAND OR ROCK STYLE SONG",
+"BANDS"
+];
+
+let remainingWords = [...originalWords];
+let spinning = false;
+
+function spin(){
+
+if(spinning) return;
+
+if(remainingWords.length === 0){
+document.getElementById("word").innerText = "ALL USED!";
+return;
+}
+
+spinning = true;
+
+let spins = 20;
+const wordBox = document.getElementById("word");
+
+const interval = setInterval(function(){
+
+const randomWord = originalWords[Math.floor(Math.random()*originalWords.length)];
+wordBox.innerText = randomWord;
+
+spins--;
+
+if(spins <= 0){
+
+clearInterval(interval);
+
+const index = Math.floor(Math.random()*remainingWords.length);
+
+const finalWord = remainingWords[index];
+
+remainingWords.splice(index,1);
+
+wordBox.innerText = finalWord;
+
+spinning = false;
+
+}
+
+},80);
+
+}
+
+function resetWords(){
+
+remainingWords = [...originalWords];
+
+document.getElementById("word").innerText = "READY";
+
+}
+
+</script>
+
+</body>
+
+</html>
